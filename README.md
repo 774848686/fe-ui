@@ -1,24 +1,58 @@
-# feng-ui
+## one-piece-ui
 
-## Project setup
-```
-yarn install
-```
+### 起源
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+ONE-PIECE-UI 是一套基于Vue开发UI 组件库。开发这个组件库的目的在于：
+1. 对于优秀UI组件库`Element-UI`的学习
+2. 在工作中的一些常用的'私有'组件的汇总，方便项目的调用
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### 说明
 
-### Lints and fixes files
+- 之所以把这个项目叫做one-piece，原因如下：
+1. 之前想叫fe-ui，但是已经有人注册了，所以放弃了；但是组件里的名字还是以`fe`开头
+2. 近期在追海贼王，所以就想到one-piece-ui这个名字
+- 这个项目还在孵化中，就像路飞找寻one-piece一样，必将历经千辛万险...
+
+### npm 安装
 ```
-yarn lint
+npm i one-piece-ui
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 使用说明
+
+你可以引入整个one-piece-ui，也可进行按需加载组件
+1. 完整引入
+在 main.js 中写入以下内容：
+
+```js
+import Vue from 'vue';
+import FeUI from 'one-piece-ui';
+import App from './App.vue';
+
+Vue.use(FeUI);
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+```
+2. 按需引入
+
+在 main.js 中写入以下内容：
+
+```js
+import Vue from 'vue';
+import {FeButton} from 'one-piece-ui';
+import App from './App.vue';
+
+Vue.use(FeButton);
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+```
+
+
+
+
