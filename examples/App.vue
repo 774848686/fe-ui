@@ -1,18 +1,33 @@
 <template>
-  <div id="app">
-    <mc-button>按钮</mc-button>
+  <div style="height:100%">
+    <el-container style="height:100%">
+      <el-header height="40">
+        <header-model></header-model>
+      </el-header>
+      <el-container>
+        <el-aside width="200px">
+          <menu-model></menu-model>
+        </el-aside>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
-
 <script>
-import McButton from './TestButton'
+import HeaderModel from "./components/header";
+import MenuModel from "./components/menu";
 export default {
-  name: 'app',
   components: {
-    McButton
-  }
+    HeaderModel,
+    MenuModel
+  },
+  data() {
+    return {};
+  },
+  methods: {}
 }
 </script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 </style>
