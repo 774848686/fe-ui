@@ -27,7 +27,9 @@ export default {
     return {};
   },
   methods: {}
-}
+};
 </script>
-<style lang="scss" scoped>
+<style>
+/* 引入代码高亮样式 */
+@import '~highlight.js/styles/color-brewer.css';
 </style>

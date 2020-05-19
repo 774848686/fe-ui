@@ -43,6 +43,7 @@
 </template>
 
 <style lang="scss">
+
 .demo-block {
   border: solid 1px #ebebeb;
   border-radius: 3px;
@@ -182,8 +183,7 @@
 </style>
 
 <script>
-// import { stripScript, stripStyle, stripTemplate } from "../util";
-
+import { stripScript, stripStyle, stripTemplate } from "../util";
 export default {
   data() {
     return {
@@ -289,11 +289,11 @@ export default {
           code = cur.children[0].text;
         }
       }
-      // if (code) {
-      //   this.codepen.html = stripTemplate(code);
-      //   this.codepen.script = stripScript(code);
-      //   this.codepen.style = stripStyle(code);
-      // }
+      if (code) {
+        this.codepen.html = stripTemplate(code);
+        this.codepen.script = stripScript(code);
+        this.codepen.style = stripStyle(code);
+      }
     }
   },
 

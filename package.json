@@ -30,7 +30,6 @@
     "babel-plugin-component": "^1.1.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "highlight": "^0.2.4",
     "highlight.js": "^9.3.0",
     "markdown-it": "^10.0.0",
     "markdown-it-anchor": "^5.2.7",
