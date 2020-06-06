@@ -27,6 +27,7 @@ npm i one-piece-ui
 ```js
 import Vue from 'vue';
 import FeUI from 'one-piece-ui';
+import '/one-piece-ui/lib/feui.css';
 import App from './App.vue';
 
 Vue.use(FeUI);
@@ -43,6 +44,7 @@ new Vue({
 ```js
 import Vue from 'vue';
 import {FeButton} from 'one-piece-ui';
+import '/one-piece-ui/lib/feui.css';
 import App from './App.vue';
 
 Vue.use(FeButton);

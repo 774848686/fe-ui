@@ -15,11 +15,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-header {
+  position: fixed;
+  top:0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .header-model {
   height: 40px;
-  line-height: 40px;
   .info {
     display: inline-block;
     font-size: 14px;

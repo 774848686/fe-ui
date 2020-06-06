@@ -1,23 +1,30 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   publicPath: './',
   lintOnSave:false,
+  outputDir:'docs',
   pages: {
     index: {
       entry: 'examples/main.js',
       template: 'public/index.html',
       filename: 'index.html'
-    }
+    },
   },
   chainWebpack: config => {
     config.module
       .rule('js')
-      .include.add(path.resolve(__dirname, 'package')).end()
+      .include.add(path.resolve(__dirname, 'packages')).end()
       .use('babel')
       .loader('babel-loader')
       .tap(options => {
         return options;
       })
+  },
+  configureWebpack: {
+    plugins: [
+    
+    ]
   },
   devServer: {
     overlay: {
