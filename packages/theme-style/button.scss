@@ -1,7 +1,0 @@
-@import './mixins/mixins.scss';
-@include b(test){
-    display: inline-block;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-}

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+@import './config.scss';
+@import '../common/var.scss';
+/* BEM
+-------------------------- */
+@mixin b($block) {
+  $B:$namespace+'-'+$block !global;
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+    @at-root { // @at-root 指规则跳出嵌套，写在最外层
+        .#{$B+ $element-separator + $element} {
+          @content;
+        }
+      }
+}
+
+@mixin m($modifier) {
+    $selector: &;
+    @at-root {
+      .#{$selector + $modifier-separator + $modifier} {
+        @content;
+      }
+    }
+  }

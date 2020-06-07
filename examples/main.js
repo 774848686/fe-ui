@@ -7,7 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss';
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js';
-import '../packages/theme-style/button.scss';
+import '../packages/theme-chalk/src/index.scss';
 // 导入组件库
 import {
   FeButton

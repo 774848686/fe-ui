@@ -1,24 +1,30 @@
 {
   "name": "one-piece-ui",
-  "version": "0.0.45.1",
+  "version": "0.0.46",
   "private": false,
   "main": "lib/feui.common.js",
-  "style": "lib/feui.css",
   "files": [
     "lib",
     "packages"
   ],
   "scripts": {
+    "init": "npm install commitizen -g && commitizen init cz-conventional-changelog --save-dev --save-exact && npm run bootstrap",
+    "bootstrap": "npm install && cd ./packages/theme-chalk && npm install",
+    "build:style": "gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+    "build:docs": "vue-cli-service build",
+    "build:lib": "node build/build-lib.js ",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "clean": "rimraf lib && rimraf packages/*/lib",
+    "deploy": "sh build/deploy.sh",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name feui --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name feui --dest lib packages/index.js && webpack --config ./build/webpack.component.js"
   },
   "dependencies": {
     "core-js": "^3.4.4",
-    "element-ui": "^2.13.1",
-    "vue": "^2.6.10",
-    "vue-router": "^3.1.6"
+    "webpack-cli": "^3.3.11"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -28,6 +34,9 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-component": "^1.1.1",
+    "cp-cli": "^2.0.0",
+    "cz-conventional-changelog": "^3.2.0",
+    "element-ui": "^2.13.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "highlight.js": "^9.3.0",
@@ -37,9 +46,15 @@
     "markdown-it-container": "^2.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
+    "progress-bar-webpack-plugin": "^2.1.0",
     "sass-loader": "^8.0.0",
+    "shelljs": "^0.8.4",
+    "signale": "^1.4.0",
     "transliteration": "^2.1.8",
+    "uppercamelcase": "^3.0.0",
+    "vue": "^2.6.11",
     "vue-markdown-loader": "^2.4.1",
+    "vue-router": "^3.3.2",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -73,5 +88,10 @@
     "fe-ui",
     "one piece"
   ],
-  "description":"learning for element"
+  "description": "learning for element",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

@@ -1,15 +1,23 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const resolve = (dir) => {
+  return path.join(__dirname, dir)
+}
 module.exports = {
   publicPath: './',
-  lintOnSave:false,
-  outputDir:'docs',
+  lintOnSave: false,
+  productionSourceMap: false,
+  outputDir: 'docs',
   pages: {
     index: {
-      entry: 'examples/main.js',
-      template: 'public/index.html',
-      filename: 'index.html'
-    },
+      entry: 'examples/main.js'
+    }
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': resolve('examples')
+      }
+    }
   },
   chainWebpack: config => {
     config.module
@@ -18,36 +26,21 @@ module.exports = {
       .use('babel')
       .loader('babel-loader')
       .tap(options => {
-        return options;
+        return options
       })
-  },
-  configureWebpack: {
-    plugins: [
-    
-    ]
+    config.module
+      .rule('md')
+      .test(/\.md/)
+      .use('vue-loader')
+      .loader('vue-loader')
+      .end()
+      .use('./build/md-loader/index.js')
+      .loader('./build/md-loader/index.js')
   },
   devServer: {
     overlay: {
       warnings: false,
       errors: false
     }
-  },
-  configureWebpack: (config) => {
-    config.module.rules.push({
-        test: /\.md$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              compilerOptions: {
-                preserveWhitespace: false
-              }
-            }
-          },
-          {
-            loader: path.resolve(__dirname, './md-loader/index.js')
-          }
-        ]
-      })
   }
 }
