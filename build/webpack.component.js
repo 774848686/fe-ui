@@ -3,6 +3,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const Components = require('./get-components')();
+console.log('Components',Components)
 const entry = {};
 Components.forEach(c => {
   entry[c] = `./packages/${c}/index.js`;

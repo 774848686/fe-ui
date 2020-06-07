@@ -17,17 +17,7 @@ const routes = [
     path: '/guide/button',
     name: 'Button',
     component: Button
-  },
-//   {
-//     path: '/input',
-//     name: 'input',
-//     component: Input
-//   }, 
-//   {
-//     path: '/button',
-//     name: 'button',
-//     component: Button
-//   }
+  }
 ]
 Vue.use(VueRouter)
 const router = new VueRouter({

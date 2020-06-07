@@ -11,15 +11,15 @@ const tips = `/* eslint-disable */
 
 function buildPackagesEntry() {
   const uninstallComponents = ['Message'];
-  const before_flag = 'Fe'
+  const UI_FLAG_NAME = 'Fe';
   const importList = Components.map(
-    name => `import ${before_flag}${uppercamelize(name)} from './${name}'`
+    name => `import ${UI_FLAG_NAME}${uppercamelize(name)} from './${name}'`
   );
 
-  const exportList = Components.map(name => `${before_flag}${uppercamelize(name)}`);
+  const exportList = Components.map(name => `${UI_FLAG_NAME}${uppercamelize(name)}`);
 
   const installList = exportList.filter(
-    name => !~uninstallComponents.indexOf(`${before_flag}${uppercamelize(name)}`)
+    name => !~uninstallComponents.indexOf(`${UI_FLAG_NAME}${uppercamelize(name)}`)
   );
 
   const content = `${tips}
@@ -33,7 +33,6 @@ function buildPackagesEntry() {
         Vue.use(Component)
       })
 
-      Vue.prototype.$message = Message
     };
     /* istanbul ignore if */
     if (typeof window !== 'undefined' && window.Vue) {

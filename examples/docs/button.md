@@ -15,12 +15,12 @@
         <fe-button type="danger">危险按钮</fe-button>
     </el-row>
     <el-row>
-        <el-button plain>朴素按钮</el-button>
-        <el-button type="primary" plain>主要按钮</el-button>
-        <el-button type="success" plain>成功按钮</el-button>
-        <el-button type="info" plain>信息按钮</el-button>
-        <el-button type="warning" plain>警告按钮</el-button>
-        <el-button type="danger" plain>危险按钮</el-button>
+        <fe-button plain>朴素按钮</fe-button>
+        <fe-button type="primary" plain>主要按钮</fe-button>
+        <fe-button type="success" plain>成功按钮</fe-button>
+        <fe-button type="info" plain>信息按钮</fe-button>
+        <fe-button type="warning" plain>警告按钮</fe-button>
+        <fe-button type="danger" plain>危险按钮</fe-button>
     </el-row>
 ```
 :::
@@ -38,12 +38,12 @@
         <fe-button type="danger" disabled>危险按钮</fe-button>
     </el-row>
     <el-row>
-        <el-button plain disabled>朴素按钮</el-button>
-        <el-button type="primary" plain disabled>主要按钮</el-button>
-        <el-button type="success" plain disabled>成功按钮</el-button>
-        <el-button type="info" plain disabled>信息按钮</el-button>
-        <el-button type="warning" plain disabled>警告按钮</el-button>
-        <el-button type="danger" plain disabled>危险按钮</el-button>
+        <fe-button plain disabled>朴素按钮</fe-button>
+        <fe-button type="primary" plain disabled>主要按钮</fe-button>
+        <fe-button type="success" plain disabled>成功按钮</fe-button>
+        <fe-button type="info" plain disabled>信息按钮</fe-button>
+        <fe-button type="warning" plain disabled>警告按钮</fe-button>
+        <fe-button type="danger" plain disabled>危险按钮</fe-button>
     </el-row>
 ```
 :::

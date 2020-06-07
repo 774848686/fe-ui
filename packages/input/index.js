@@ -1,6 +1,6 @@
-import FeButton from './src/button.vue'
+import FeInput from './src/input.vue'
 // 为组件提供 install 安装方法，供按需引入
-FeButton.install = function (Vue) {
-  Vue.component(FeButton.name, FeButton)
+FeInput.install = function (Vue) {
+  Vue.component(FeInput.name, FeInput)
 }
-export default FeButton
+export default FeInput

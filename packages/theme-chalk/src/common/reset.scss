@@ -1,0 +1,207 @@
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+address,
+figure,
+figcaption,
+menu,
+details {
+	display: block;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+caption,
+th {
+	text-align: left;
+	font-weight: normal;
+}
+
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+	border: 0;
+}
+
+i,
+cite,
+em,
+var,
+address,
+dfn {
+	font-style: normal;
+}
+
+[hidefocus],
+summary {
+	outline: 0;
+}
+
+li {
+	list-style: none;
+}
+
+sup,
+sub {
+	font-size: 83%;
+}
+
+pre,
+code,
+kbd,
+samp {
+	font-family: inherit;
+}
+
+textarea {
+	overflow: auto;
+	resize: none;
+}
+
+label,
+summary {
+	cursor: default;
+}
+
+a,
+button {
+	cursor: pointer;
+}
+
+del,
+ins,
+u,
+s,
+a,
+a:hover {
+	text-decoration: none;
+}
+
+body {
+	background: #fff;
+}
+
+label {
+	cursor: pointer;
+}
+
+body,
+textarea,
+input,
+button,
+select,
+keygen,
+legend {
+	font: 14px/1.42858 Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+	color: #313949;
+	outline: 0;
+}
+
+a {
+	color: #5494db;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #67aaf5;
+}
+
+a.z-dis,
+a[disabled] {
+	cursor: default;
+	color: #999;
+}
+
+a.z-dis:hover,
+a[disabled]:hover {
+	text-decoration: none !important;
+	color: #999 !important;
+}
+
+button {
+	border: 0;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+	display: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+	box-shadow: 0 0 0 1000px white inset;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {
+	box-shadow: 0 0 0 1000px white inset;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background: none;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background: #c9d2e0;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+	display: none;
+}
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	margin: 0;
+}

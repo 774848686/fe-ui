@@ -1,25 +1,9 @@
 <template>
-  <button
-    class="fe-button fe-test"
-    :disabled="disabled"
-    @click="handleClick"
-    :class="[
-      `fe-button--${type}`,
-      {
-        'is-plain': plain,
-        'is-round': round,
-        'is-circle': circle,
-        'is-disabled': disabled
-      }
-    ]">
-    <i :class="icon" v-if="icon"></i>
-    <!-- 如果没有传入插槽的时候才显示 -->
-    <span v-if="$slots.default"><slot></slot></span>
-  </button>
+  <input type="text">
 </template>
 <script>
 export default {
-  name: 'FeButton',
+  name: 'FeInput',
   props: {
     type: {
       type: String,

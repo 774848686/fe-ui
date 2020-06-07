@@ -27,7 +27,7 @@ npm i one-piece-ui
 ```js
 import Vue from 'vue';
 import FeUI from 'one-piece-ui';
-import '/one-piece-ui/lib/feui.css';
+import '/one-piece-ui/lib/theme-chalk.css';
 import App from './App.vue';
 
 Vue.use(FeUI);
@@ -38,16 +38,31 @@ new Vue({
 });
 ```
 2. 按需引入
+借助 `babel-plugin-component`，我们可以只引入需要的组件，以达到减小项目体积的目的。
 
+&nbsp;&nbsp;&nbsp;&nbsp;然后，将 .babelrc 修改为：
+
+```json
+{
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "one-piece-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+}
+```
 在 main.js 中写入以下内容：
 
 ```js
 import Vue from 'vue';
-import {FeButton} from 'one-piece-ui';
-import '/one-piece-ui/lib/feui.css';
+import {Button} from 'one-piece-ui';
 import App from './App.vue';
 
-Vue.use(FeButton);
+Vue.use(Button);
 
 new Vue({
   el: '#app',
