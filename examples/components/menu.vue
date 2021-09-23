@@ -1,12 +1,7 @@
 <template lang="html">
   <div class="menu-model">
-    <el-menu
-      default-active="1"
-      :unique-opened="true"
-      :default-openeds="['1', '2', '3']"
-      :default-active="defaultActive"
-      :router="true"
-    >
+    <el-menu default-active="1" :unique-opened="true" :default-openeds="['1', '2', '3']" :default-active="defaultActive"
+      :router="true">
       <el-submenu index="1">
         <template slot="title">
           <span>开发指南</span>
@@ -20,10 +15,7 @@
           <span>通用模块</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/guide/input">Input</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group>
-          <el-menu-item index="/guide/button">Button</el-menu-item>
+          <el-menu-item v-for="(item,index) in routes" :index="item.path">{{item.name}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -31,19 +23,23 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      defaultActive: '/guide/install'
-    }
-  },
-  created () {
-    const path = this.$route.fullPath
-    this.defaultActive = path == '/' ? '/guide/install' : path
-  },
-  methods: {
+  import Routers from '../router';
+  export default {
+    data() {
+      return {
+        defaultActive: '/guide/install',
+        routes: []
+      }
+    },
+    created() {
+      const path = this.$route.fullPath
+      this.defaultActive = path == '/' ? '/guide/install' : path;
+      this.routes = Routers.routes.filter(r => r.path !== '/' && r.path !== '/guide/installation');
+      console.log(this.routes)
+    },
+    methods: {}
   }
-}
+
 </script>
 
 <style lang="css">

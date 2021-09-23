@@ -30,7 +30,7 @@
 
 ```html
  <el-row>
-        <fe-button>默认按钮</fe-button>
+        <fe-button disabled>默认按钮</fe-button>
         <fe-button type="primary" disabled>主要按钮</fe-button>
         <fe-button type="success" disabled>成功按钮</fe-button>
         <fe-button type="info" disabled>信息按钮</fe-button>
@@ -39,11 +39,11 @@
     </el-row>
     <el-row>
         <fe-button plain disabled>朴素按钮</fe-button>
-        <fe-button type="primary" plain disabled>主要按钮</fe-button>
-        <fe-button type="success" plain disabled>成功按钮</fe-button>
-        <fe-button type="info" plain disabled>信息按钮</fe-button>
-        <fe-button type="warning" plain disabled>警告按钮</fe-button>
-        <fe-button type="danger" plain disabled>危险按钮</fe-button>
+        <fe-button type="primary" disabled plain>主要按钮</fe-button>
+        <fe-button type="success" disabled plain>成功按钮</fe-button>
+        <fe-button type="info" disabled plain>信息按钮</fe-button>
+        <fe-button type="warning" disabled plain>警告按钮</fe-button>
+        <fe-button type="danger" disabled plain>危险按钮</fe-button>
     </el-row>
 ```
 :::

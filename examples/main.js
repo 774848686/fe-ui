@@ -10,20 +10,22 @@ import hljs from 'highlight.js';
 import '../packages/theme-chalk/src/button.scss';
 // 导入组件库
 import {
-  FeButton
+  FeButton,
+  FeInput
 } from '../packages'
 Vue.config.productionTip = false
 
 Vue.use(FeButton)
+Vue.use(FeInput)
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
-router.afterEach(route => {
+router.router.afterEach(route => {
   Vue.nextTick(() => {
     const blocks = document.querySelectorAll('pre code');
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
   });
 });
 new Vue({
-  router,
+  router:router.router,
   render: h => h(App)
 }).$mount('#app')

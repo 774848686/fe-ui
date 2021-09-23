@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Installation from '../docs/Installation.md';
 import Button from '../docs/button.md'
+import Input from '../docs/input.md'
 import VueRouter from 'vue-router';
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     component: Installation
   },
   {
+    path: '/guide/input',
+    name: 'Input',
+    component: Input
+  },
+  {
     path: '/guide/button',
     name: 'Button',
     component: Button
@@ -23,4 +29,4 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes
 })
-export default router
+export default {router,routes}

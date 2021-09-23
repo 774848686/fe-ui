@@ -1,7 +1,7 @@
 <template>
   <button
     class="fe-button fe-test"
-    :disabled="disabled"
+    :disabled="true"
     @click="handleClick"
     :class="[
       `fe-button--${type}`,
@@ -50,7 +50,6 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$attrs)
   }
 }
 </script>

@@ -33,7 +33,11 @@
     border-color: #c6e2ff;
     background-color: #ecf5ff;
   }
-
+  &.is-disabled:hover {
+    cursor: not-allowed;
+    background-image: none;
+    border-color: #ebeef5;
+  }
   &.is-plain:hover,
   &.is-plain:focus {
     background: #fff;
