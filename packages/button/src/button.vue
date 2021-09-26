@@ -1,16 +1,17 @@
 <template>
   <button
-    class="fe-button fe-test"
+    class="fe-button"
     :disabled="true"
     @click="handleClick"
     :class="[
       `fe-button--${type}`,
+       size ? `fe-button--${size}` : '',
       {
         'is-plain': plain,
         'is-round': round,
         'is-circle': circle,
         'is-disabled': disabled
-      }
+      },
     ]">
     <i :class="icon" v-if="icon"></i>
     <!-- 如果没有传入插槽的时候才显示 -->
@@ -21,6 +22,10 @@
 export default {
   name: 'FeButton',
   props: {
+    size:{
+      type:String,
+      default:'default'
+    },
     type: {
       type: String,
       default: 'default'

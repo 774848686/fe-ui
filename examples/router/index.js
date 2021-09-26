@@ -15,15 +15,15 @@ const routes = [
     component: Installation
   },
   {
+    path: '/guide/button',
+    name: 'Button',
+    component: Button
+  },
+  {
     path: '/guide/input',
     name: 'Input',
     component: Input
   },
-  {
-    path: '/guide/button',
-    name: 'Button',
-    component: Button
-  }
 ]
 Vue.use(VueRouter)
 const router = new VueRouter({

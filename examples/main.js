@@ -8,6 +8,7 @@ import './style/index.scss';
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js';
 import '../packages/theme-chalk/src/button.scss';
+import '../packages/theme-chalk/src/input.scss';
 // 导入组件库
 import {
   FeButton,

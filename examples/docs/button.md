@@ -47,3 +47,16 @@
     </el-row>
 ```
 :::
+### 不同尺寸
+Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置size属性来配置它们。
+
+```html
+ <el-row>
+        <fe-button>默认按钮</fe-button>
+        <fe-button type="primary" size="medium">中等按钮</fe-button>
+        <fe-button type="success" size="small">小型按钮</fe-button>
+        <fe-button type="info" size="mini">超小按钮</fe-button>
+    </el-row>
+```
+:::
