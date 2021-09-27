@@ -12,7 +12,7 @@
       </el-submenu>
       <el-submenu index="2">
         <template slot="title">
-          <span>通用模块</span>
+          <span>组件</span>
         </template>
         <el-menu-item-group>
           <el-menu-item v-for="(item,index) in routes" :index="item.path">{{item.name}}</el-menu-item>

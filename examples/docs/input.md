@@ -1,13 +1,50 @@
-## Input 组件
-常用的操作按钮。
+## Input 输入框
+
+通过鼠标或键盘输入字符
+
+:::warning
+Input 为受控组件，它**总会显示 Vue 绑定值**。
+
+通常情况下，应当处理 `input` 事件，并更新组件的绑定值（或使用`v-model`）。否则，输入框内显示的值将不会改变。
+
+不支持 `v-model` 修饰符。
+:::
 
 ### 基础用法
-基础的按钮用法。
-:::demo 使用`type`、`plain`、`round`和`circle`属性来定义 Button 的样式。
 
+:::demo
 ```html
-    <el-row>
-        <fe-input>默认按钮</fe-input>
-    </el-row>
+
+<fe-input v-model="input" placeholder="请输入内容"></fe-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+
+### 禁用状态
+
+:::demo 通过 disabled 属性指定是否禁用 input 组件
+```html
+
+<fe-input v-model="input" disabled placeholder="请输入内容"></fe-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
 ```
 :::

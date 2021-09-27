@@ -64,4 +64,20 @@
       border-color: $--input-focus-border;
     }
   }
+  @include when(disabled) {
+    .fe-input__inner {
+      background-color: $--input-disabled-fill;
+      border-color: $--input-disabled-border;
+      color: $--input-disabled-color;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+    }
+
+    .el-input__icon {
+      cursor: not-allowed;
+    }
+  }
 }

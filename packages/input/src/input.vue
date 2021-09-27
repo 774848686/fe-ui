@@ -133,10 +133,10 @@
 
     computed: {
        inputSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size;
       },
       inputDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled;
       },
       nativeInputValue() {
         return this.value === null || this.value === undefined ? '' : String(this.value);
