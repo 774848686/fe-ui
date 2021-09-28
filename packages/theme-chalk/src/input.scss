@@ -1,5 +1,6 @@
 @import './mixins/mixins.scss';
 @import "common/var";
+@import './fonts//fonts_input.scss';
 
 @include b(input) {
   position: relative;
@@ -64,6 +65,33 @@
       border-color: $--input-focus-border;
     }
   }
+  @include e(suffix) {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    text-align: center;
+    color: $--input-icon-color;
+    transition: all .3s;
+    pointer-events: none;
+  }
+  @include e(icon) {
+    display: inline-block;
+    height: 100%;
+    width: 25px;
+    text-align: center;
+    transition: all .3s;
+    line-height: $--input-height;
+
+    &:after {
+      content: '';
+      height: 100%;
+      width: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
   @include when(disabled) {
     .fe-input__inner {
       background-color: $--input-disabled-fill;
@@ -81,3 +109,5 @@
     }
   }
 }
+
+

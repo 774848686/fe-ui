@@ -24,43 +24,30 @@
         @compositionend="handleCompositionEnd" @input="handleInput" @focus="handleFocus" @blur="handleBlur"
         @change="handleChange" :aria-label="label">
       <!-- 前置内容 -->
-      <span class="fe-input__prefix" v-if="$slots.prefix || prefixIcon">
+      <!-- <span class="fe-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <i class="fe-input__icon" v-if="prefixIcon" :class="prefixIcon">
         </i>
-      </span>
+      </span> -->
       <!-- 后置内容 -->
-      <!-- <span
-        class="fe-input__suffix"
-        v-if="getSuffixVisible()">
+      <span class="fe-input__suffix">
         <span class="fe-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
-            <i class="fe-input__icon"
-              v-if="suffixIcon"
-              :class="suffixIcon">
+            <i class="fe-input__icon" v-if="suffixIcon" :class="suffixIcon">
             </i>
           </template>
-          <i v-if="showClear"
-            class="fe-input__icon fe-icon-circle-close fe-input__clear"
-            @mousedown.prevent
-            @click="clear"
-          ></i>
-          <i v-if="showPwdVisible"
-            class="fe-input__icon fe-icon-view fe-input__clear"
-            @click="handlePasswordVisible"
-          ></i>
+          <i v-if="showClear" class="fe-input__icon fe-icon-circle-close fe-input__clear" @mousedown.prevent
+            @click="clear"></i>
+          <i v-if="showPwdVisible" class="fe-input__icon fe-icon-view fe-input__clear"
+            @click="handlePasswordVisible"></i>
           <span v-if="isWordLimitVisible" class="fe-input__count">
             <span class="fe-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
             </span>
           </span>
         </span>
-        <i class="fe-input__icon"
-          v-if="validateState"
-          :class="['fe-input__validateIcon', validateIcon]">
-        </i>
-      </span> -->
+      </span>
       <!-- 后置元素 -->
       <div class="fe-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
@@ -132,7 +119,7 @@
     },
 
     computed: {
-       inputSize() {
+      inputSize() {
         return this.size;
       },
       inputDisabled() {
@@ -141,7 +128,7 @@
       nativeInputValue() {
         return this.value === null || this.value === undefined ? '' : String(this.value);
       },
-      autoComplete(){
+      autoComplete() {
         return this.autosize
       },
       showClear() {
@@ -179,21 +166,34 @@
         // show exceed style if length of initial value greater then maxlength
         return this.isWordLimitVisible &&
           (this.textLength > this.upperLimit);
-      }
+      },
     },
 
     watch: {
-
+      value(v) {
+        console.log(v)
+      },
+      nativeInputValue() {
+        this.setNativeInputValue();
+      },
     },
 
     methods: {
-      focus() {},
-      blur() {},
-      handleBlur(event) {},
-      select() {},
+      handleBlur(event) {
+        this.focused = false;
+      },
       resizeTextarea() {},
-      handleFocus(event) {},
-      handleInput(event) {},
+      handleFocus(event) {
+        this.focused = true;
+      },
+      handleInput(event) {
+        if (event.target.value === this.nativeInputValue) return;
+
+        this.$emit('input', event.target.value);
+        // ensure native input value is controlled
+        // see: https://github.com/ElemeFE/element/issues/12850
+        this.$nextTick(this.setNativeInputValue);
+      },
       handleChange(event) {},
       clear() {
         this.$emit('input', '');
@@ -211,11 +211,32 @@
       getInput() {
         return this.$refs.input || this.$refs.textarea;
       },
+      getSuffixVisible() {
+        return this.$slots.suffix ||
+          this.suffixIcon ||
+          this.showClear ||
+          this.showPassword ||
+          this.isWordLimitVisible ||
+          (this.validateState && this.needStatusIcon);
+      },
+      getInput() {
+        return this.$refs.input || this.$refs.textarea;
+      },
+      setNativeInputValue() {
+        const input = this.getInput();
+        if (!input) return;
+        console.log('this.nativeInputValue',this.nativeInputValue,'value',input.value)
+        if (input.value === this.nativeInputValue) return;
+        input.value = this.nativeInputValue;
+      },
     },
 
-    created() {},
+    created() {
+    },
 
-    mounted() {},
+    mounted() {
+      this.setNativeInputValue();
+    },
 
     updated() {}
   };

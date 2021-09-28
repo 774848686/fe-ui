@@ -48,3 +48,22 @@ export default {
 </script>
 ```
 :::
+
+### 可清空
+
+:::demo 使用clearable属性即可得到一个可清空的输入框
+```html
+
+<fe-input v-model="input" value="1" clearable placeholder="请输入内容"></fe-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
