@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import './config.scss';
 @import '../common/var.scss';
+@import "./function.scss";
 
 /* Scrollbar
  -------------------------- */
@@ -64,11 +65,26 @@
 }
 
 @mixin e($element) {
-  @at-root {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+  }
 
-    // @at-root 指规则跳出嵌套，写在最外层
-    #{&}#{$element-separator+$element} {
-      @content;
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
     }
   }
 }

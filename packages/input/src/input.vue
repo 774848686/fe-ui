@@ -120,6 +120,7 @@
 
     computed: {
       inputSize() {
+        console.log(this.size)
         return this.size;
       },
       inputDisabled() {

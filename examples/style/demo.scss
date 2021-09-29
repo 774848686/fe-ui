@@ -1,4 +1,4 @@
-a{
+a {
     color: #409EFF;
     text-decoration: none;
     opacity: 0;
@@ -7,9 +7,16 @@ a{
     opacity: 0;
     cursor: pointer;
 }
-.el-row{
+
+.el-row {
     margin-bottom: 20px;
 }
-.demo-input .fe-input{
+
+.demo-input .fe-input {
     width: 180px;
+}
+
+.demo-input  .fe-input {
+    vertical-align: top;
+    margin: 0 0px 10px 0;
 }

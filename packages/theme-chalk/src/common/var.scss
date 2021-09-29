@@ -216,3 +216,16 @@ $--input-disabled-fill: $--disabled-fill-base !default;
 $--input-disabled-border: $--disabled-border-base !default;
 $--input-disabled-color: $--disabled-color-base !default;
 $--input-disabled-placeholder-color: $--color-text-placeholder !default;
+
+/// fontSize||Font|1
+$--input-medium-font-size: 14px !default;
+/// height||Other|4
+$--input-medium-height: 36px !default;
+/// fontSize||Font|1
+$--input-small-font-size: 13px !default;
+/// height||Other|4
+$--input-small-height: 32px !default;
+/// fontSize||Font|1
+$--input-mini-font-size: 12px !default;
+/// height||Other|4
+$--input-mini-height: 28px !default;

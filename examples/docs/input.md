@@ -54,7 +54,29 @@ export default {
 :::demo 使用clearable属性即可得到一个可清空的输入框
 ```html
 
-<fe-input v-model="input" value="1" clearable placeholder="请输入内容"></fe-input>
+<fe-input v-model="input" clearable placeholder="请输入内容"></fe-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### 不同尺寸
+
+:::demo 可通过`size`属性指定输入框的尺寸，除了默认的大小外，还提供了 `medium`、`small`和`mini`三种尺寸
+```html
+
+<fe-input v-model="input" placeholder="请输入内容"></fe-input>
+<fe-input v-model="input" size="medium" placeholder="请输入内容"></fe-input>
+<fe-input v-model="input" size="small" placeholder="请输入内容"></fe-input>
+<fe-input v-model="input" size="mini" placeholder="请输入内容"></fe-input>
 
 <script>
 export default {
