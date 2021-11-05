@@ -12,10 +12,9 @@ import '../packages/theme-chalk/src/input.scss';
 // 导入组件库
 import {
   FeButton,
-  FeInput
+  FeInput,
 } from '../packages'
 Vue.config.productionTip = false
-
 Vue.use(FeButton)
 Vue.use(FeInput)
 Vue.use(ElementUI)
