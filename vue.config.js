@@ -15,7 +15,9 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': resolve('examples')
+        '@': resolve('examples'),
+        '@utils':resolve('utils'),
+        'fe-ui':resolve('./')
       }
     }
   },

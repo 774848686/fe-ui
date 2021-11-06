@@ -89,3 +89,21 @@ export default {
 </script>
 ```
 :::
+### 输入长度限制
+
+:::demo `maxlength` 和 `minlength` 用来限制输入框的字符长度，在使用 `maxlength` 属性限制最大输入长度的同时，可通过设置 `show-word-limit` 属性来展示字数统计。
+```html
+<fe-input v-model="input" maxlength="10" readonly :show-word-limit="false" placeholder="请输入内容"></fe-input>
+<fe-input v-model="input" maxlength="10" show-word-limit placeholder="请输入内容"></fe-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::

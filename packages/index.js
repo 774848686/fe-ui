@@ -1,8 +1,10 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
-import FeButton from './button'
-import FeInput from './input'
-import FeRadio from './radio'
+import Button from './button'
+import Input from './input'
+import Radio from './radio'
+import RadioGroup from './radio-group'
+
 const requireComponent = require.context('../packages', true, /^(?!\.\/theme-chalk)(.*[a-z0-9]+\/index+\.js)$/i);
 const components = [];
 const exportContent = {};
@@ -23,9 +25,10 @@ if (typeof window !== 'undefined' && window.Vue) {
 export {
   install,
   version,
-  FeButton,
-  FeInput,
-  FeRadio
+  Button,
+  Input,
+  Radio,
+  RadioGroup
 }
 export default {
   install,

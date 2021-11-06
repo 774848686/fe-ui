@@ -21,6 +21,7 @@
 <script>
 export default {
   name: 'FeButton',
+  componentName:'FEButton',
   props: {
     size:{
       type:String,

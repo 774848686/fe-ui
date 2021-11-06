@@ -7,16 +7,19 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './style/index.scss';
 import demoBlock from './components/demo-block'
 import hljs from 'highlight.js';
-import '../packages/theme-chalk/src/button.scss';
-import '../packages/theme-chalk/src/input.scss';
+import '../packages/theme-chalk/src/index.scss';
 // 导入组件库
 import {
-  FeButton,
-  FeInput,
+  Button,
+  Input,
+  Radio,
+  RadioGroup
 } from '../packages'
 Vue.config.productionTip = false
-Vue.use(FeButton)
-Vue.use(FeInput)
+Vue.use(Button)
+Vue.use(Input)
+Vue.use(Radio)
+Vue.use(RadioGroup)
 Vue.use(ElementUI)
 Vue.component('demo-block', demoBlock)
 router.router.afterEach(route => {

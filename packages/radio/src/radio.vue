@@ -1,76 +1,36 @@
 <template>
-  <div :class="[
-    type === 'textarea' ? 'fe-textarea' : 'fe-input',
-    inputSize ? 'fe-input--' + inputSize : '',
-    {
-      'is-disabled': inputDisabled,
-      'is-exceed': inputExceed,
-      'fe-input-group': $slots.prepend || $slots.append,
-      'fe-input-group--append': $slots.append,
-      'fe-input-group--prepend': $slots.prepend,
-      'fe-input--prefix': $slots.prefix || prefixIcon,
-      'fe-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
-    }
-    ]" @mouseenter="hovering = true" @mouseleave="hovering = false">
-    <template v-if="type !== 'textarea'">
-      <!-- 前置元素 -->
-      <div class="fe-input-group__prepend" v-if="$slots.prepend">
-        <slot name="prepend"></slot>
-      </div>
-      <input :tabindex="tabindex" v-if="type !== 'textarea'" class="fe-input__inner" v-bind="$attrs"
-        :type="showPassword ? (passwordVisible ? 'text': 'password') : type" :disabled="inputDisabled"
-        :readonly="readonly" :autocomplete="autoComplete || autocomplete" ref="input"
-        @compositionstart="handleCompositionStart" @compositionupdate="handleCompositionUpdate"
-        @compositionend="handleCompositionEnd" @input="handleInput" @focus="handleFocus" @blur="handleBlur"
-        @change="handleChange" :aria-label="label">
-      <!-- 前置内容 -->
-      <!-- <span class="fe-input__prefix" v-if="$slots.prefix || prefixIcon">
-        <slot name="prefix"></slot>
-        <i class="fe-input__icon" v-if="prefixIcon" :class="prefixIcon">
-        </i>
-      </span> -->
-      <!-- 后置内容 -->
-      <span class="fe-input__suffix">
-        <span class="fe-input__suffix-inner">
-          <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
-            <slot name="suffix"></slot>
-            <i class="fe-input__icon" v-if="suffixIcon" :class="suffixIcon">
-            </i>
-          </template>
-          <i v-if="showClear" class="fe-input__icon fe-icon-circle-close fe-input__clear" @mousedown.prevent
-            @click="clear"></i>
-          <i v-if="showPwdVisible" class="fe-input__icon fe-icon-view fe-input__clear"
-            @click="handlePasswordVisible"></i>
-          <span v-if="isWordLimitVisible" class="fe-input__count">
-            <span class="fe-input__count-inner">
-              {{ textLength }}/{{ upperLimit }}
-            </span>
-          </span>
-        </span>
-      </span>
-      <!-- 后置元素 -->
-      <div class="fe-input-group__append" v-if="$slots.append">
-        <slot name="append"></slot>
-      </div>
-    </template>
-    <textarea v-else :tabindex="tabindex" class="fe-textarea__inner" @compositionstart="handleCompositionStart"
-      @compositionupdate="handleCompositionUpdate" @compositionend="handleCompositionEnd" @input="handleInput"
-      ref="textarea" v-bind="$attrs" :disabled="inputDisabled" :readonly="readonly"
-      :autocomplete="autoComplete || autocomplete" :style="textareaStyle" @focus="handleFocus" @blur="handleBlur"
-      @change="handleChange" :aria-label="label">
-    </textarea>
-    <!-- <span v-if="isWordLimitVisible && type === 'textarea'"
-      class="fe-input__count">{{ textLength }}/{{ upperLimit }}</span> -->
-  </div>
+  <label class="fe-radio" :class="[
+      border && radioSize ? 'fe-radio--' + radioSize : '',
+      { 'is-disabled': isDisabled },
+      { 'is-focus': focus },
+      { 'is-bordered': border },
+      { 'is-checked': model === label }
+    ]" role="radio" :aria-checked="model === label" :aria-disabled="isDisabled" :tabindex="tabIndex"
+    @keydown.space.stop.prevent="model = isDisabled ? model : label">
+    <span class="fe-radio__input" :class="{
+        'is-disabled': isDisabled,
+        'is-checked': model === label
+      }">
+      <span class="fe-radio__inner"></span>
+      <input ref="radio" class="fe-radio__original" :value="label" type="radio" aria-hidden="true" v-model="model"
+        @focus="focous = true" @blur="focus = false" @change="handleChange" :name="name" :disabled="isDisabled"
+        tabindex="-1">
+    </span>
+    <span class="fe-radio__label" @keydown.stop>
+      <slot></slot>
+      <template v-if="!$slots.default">{{label}}</template>
+    </span>
+  </label>
 </template>
 <script>
+  import Emiter from 'fe-ui/mixins/Emiter';
   export default {
     name: 'FeRadio',
 
-    componentName: 'ElRadio',
+    componentName: 'FERadio',
 
     inheritAttrs: false,
-
+    mixins: [Emiter],
     data() {
       return {
         textareaCalcStyle: {},
@@ -82,162 +42,69 @@
     },
 
     props: {
-      value: [String, Number],
-      size: String,
-      resize: String,
-      form: String,
+      value: {},
+      label: {},
       disabled: Boolean,
-      readonly: Boolean,
-      type: {
-        type: String,
-        default: 'text'
-      },
-      autosize: {
-        type: [Boolean, Object],
-        default: false
-      },
-      autocomplete: {
-        type: String,
-        default: 'off'
-      },
-      suffixIcon: String,
-      prefixIcon: String,
-      label: String,
-      clearable: {
-        type: Boolean,
-        default: false
-      },
-      showPassword: {
-        type: Boolean,
-        default: false
-      },
-      showWordLimit: {
-        type: Boolean,
-        default: false
-      },
-      tabindex: String
+      name: String,
+      border: Boolean,
+      size: String
     },
 
     computed: {
-      inputSize() {
-        console.log(this.size)
-        return this.size;
+      isGroup() {
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.componentName !== 'FERadioGroup') {
+            parent = parent.$parent;
+          } else {
+            this._radioGroup = parent;
+            return true;
+          }
+        }
+        return false;
       },
-      inputDisabled() {
+      radioSize() {
+        const temRadioSize = this.size;
+        return temRadioSize;
+      },
+      isDisabled() {
         return this.disabled;
       },
-      nativeInputValue() {
-        return this.value === null || this.value === undefined ? '' : String(this.value);
+      tabIndex() {
+        return (this.model !== this.label) ? -1 : 0;
       },
-      autoComplete() {
-        return this.autosize
-      },
-      showClear() {
-        return this.clearable &&
-          !this.inputDisabled &&
-          !this.readonly &&
-          this.nativeInputValue &&
-          (this.focused || this.hovering);
-      },
-      showPwdVisible() {
-        return this.showPassword &&
-          !this.inputDisabled &&
-          !this.readonly &&
-          (!!this.nativeInputValue || this.focused);
-      },
-      isWordLimitVisible() {
-        return this.showWordLimit &&
-          this.$attrs.maxlength &&
-          (this.type === 'text' || this.type === 'textarea') &&
-          !this.inputDisabled &&
-          !this.readonly &&
-          !this.showPassword;
-      },
-      upperLimit() {
-        return this.$attrs.maxlength;
-      },
-      textLength() {
-        if (typeof this.value === 'number') {
-          return String(this.value).length;
+      model: {
+        get() {
+          return this.isGroup ? this._radioGroup.value : this.value;
+        },
+        set(val) {
+          if (this.isGroup) {
+            this.dispatch('FERadioGroup', 'input', [val])
+          } else {
+            this.$emit('input', val);
+          }
+          this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
         }
-
-        return (this.value || '').length;
-      },
-      inputExceed() {
-        // show exceed style if length of initial value greater then maxlength
-        return this.isWordLimitVisible &&
-          (this.textLength > this.upperLimit);
       },
     },
 
-    watch: {
-      value(v) {
-        console.log(v)
-      },
-      nativeInputValue() {
-        this.setNativeInputValue();
-      },
-    },
+    watch: {},
 
     methods: {
-      handleBlur(event) {
-        this.focused = false;
-      },
-      resizeTextarea() {},
-      handleFocus(event) {
-        this.focused = true;
-      },
-      handleInput(event) {
-        if (event.target.value === this.nativeInputValue) return;
-
-        this.$emit('input', event.target.value);
-        // ensure native input value is controlled
-        // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(this.setNativeInputValue);
-      },
-      handleChange(event) {},
-      clear() {
-        this.$emit('input', '');
-        this.$emit('change', '');
-        this.$emit('clear');
-      },
-      handlePasswordVisible() {},
-      handleCompositionStart() {
-
-      },
-      handleCompositionUpdate() {
-
-      },
-      handleCompositionEnd() {},
-      getInput() {
-        return this.$refs.input || this.$refs.textarea;
-      },
-      getSuffixVisible() {
-        return this.$slots.suffix ||
-          this.suffixIcon ||
-          this.showClear ||
-          this.showPassword ||
-          this.isWordLimitVisible ||
-          (this.validateState && this.needStatusIcon);
-      },
-      getInput() {
-        return this.$refs.input || this.$refs.textarea;
-      },
-      setNativeInputValue() {
-        const input = this.getInput();
-        if (!input) return;
-        console.log('this.nativeInputValue',this.nativeInputValue,'value',input.value)
-        if (input.value === this.nativeInputValue) return;
-        input.value = this.nativeInputValue;
-      },
+      handleChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.model);
+          this.dispatch('FERadioGroup', 'handleChange', this.model)
+        });
+      }
     },
 
     created() {
+      this.focus = false;
+
     },
 
-    mounted() {
-      this.setNativeInputValue();
-    },
+    mounted() {},
 
     updated() {}
   };

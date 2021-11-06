@@ -13,23 +13,11 @@
     }
     ]" @mouseenter="hovering = true" @mouseleave="hovering = false">
     <template v-if="type !== 'textarea'">
-      <!-- 前置元素 -->
-      <div class="fe-input-group__prepend" v-if="$slots.prepend">
-        <slot name="prepend"></slot>
-      </div>
       <input :tabindex="tabindex" v-if="type !== 'textarea'" class="fe-input__inner" v-bind="$attrs"
         :type="showPassword ? (passwordVisible ? 'text': 'password') : type" :disabled="inputDisabled"
         :readonly="readonly" :autocomplete="autoComplete || autocomplete" ref="input"
-        @compositionstart="handleCompositionStart" @compositionupdate="handleCompositionUpdate"
-        @compositionend="handleCompositionEnd" @input="handleInput" @focus="handleFocus" @blur="handleBlur"
-        @change="handleChange" :aria-label="label">
-      <!-- 前置内容 -->
-      <!-- <span class="fe-input__prefix" v-if="$slots.prefix || prefixIcon">
-        <slot name="prefix"></slot>
-        <i class="fe-input__icon" v-if="prefixIcon" :class="prefixIcon">
-        </i>
-      </span> -->
-      <!-- 后置内容 -->
+        @compositionstart="handleCompositionStart" @compositionupdate="handleCompositionUpdate" @input="handleInput"
+        @focus="handleFocus" @blur="handleBlur" :aria-label="label">
       <span class="fe-input__suffix">
         <span class="fe-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
@@ -39,8 +27,7 @@
           </template>
           <i v-if="showClear" class="fe-input__icon fe-icon-circle-close fe-input__clear" @mousedown.prevent
             @click="clear"></i>
-          <i v-if="showPwdVisible" class="fe-input__icon fe-icon-view fe-input__clear"
-            @click="handlePasswordVisible"></i>
+          <i v-if="showPwdVisible" class="fe-input__icon fe-icon-view fe-input__clear"></i>
           <span v-if="isWordLimitVisible" class="fe-input__count">
             <span class="fe-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
@@ -48,26 +35,15 @@
           </span>
         </span>
       </span>
-      <!-- 后置元素 -->
-      <div class="fe-input-group__append" v-if="$slots.append">
-        <slot name="append"></slot>
-      </div>
     </template>
-    <textarea v-else :tabindex="tabindex" class="fe-textarea__inner" @compositionstart="handleCompositionStart"
-      @compositionupdate="handleCompositionUpdate" @compositionend="handleCompositionEnd" @input="handleInput"
-      ref="textarea" v-bind="$attrs" :disabled="inputDisabled" :readonly="readonly"
-      :autocomplete="autoComplete || autocomplete" :style="textareaStyle" @focus="handleFocus" @blur="handleBlur"
-      @change="handleChange" :aria-label="label">
-    </textarea>
-    <!-- <span v-if="isWordLimitVisible && type === 'textarea'"
-      class="fe-input__count">{{ textLength }}/{{ upperLimit }}</span> -->
   </div>
 </template>
 <script>
+import {isKorean} from '@utils/shared';
   export default {
     name: 'FeInput',
 
-    componentName: 'ElInput',
+    componentName: 'FEInput',
 
     inheritAttrs: false,
 
@@ -76,7 +52,6 @@
         textareaCalcStyle: {},
         hovering: false,
         focused: false,
-        isComposing: false,
         passwordVisible: false
       };
     },
@@ -171,9 +146,6 @@
     },
 
     watch: {
-      value(v) {
-        console.log(v)
-      },
       nativeInputValue() {
         this.setNativeInputValue();
       },
@@ -183,32 +155,34 @@
       handleBlur(event) {
         this.focused = false;
       },
-      resizeTextarea() {},
       handleFocus(event) {
         this.focused = true;
       },
       handleInput(event) {
+        if (this.isComposing) return;
         if (event.target.value === this.nativeInputValue) return;
-
         this.$emit('input', event.target.value);
-        // ensure native input value is controlled
-        // see: https://github.com/ElemeFE/element/issues/12850
         this.$nextTick(this.setNativeInputValue);
       },
-      handleChange(event) {},
       clear() {
         this.$emit('input', '');
         this.$emit('change', '');
         this.$emit('clear');
       },
-      handlePasswordVisible() {},
       handleCompositionStart() {
-
+        this.isComposing = true;
       },
-      handleCompositionUpdate() {
-
+       handleCompositionUpdate(event) {
+        const text = event.target.value;
+        const lastCharacter = text[text.length - 1] || '';
+        this.isComposing = !isKorean(lastCharacter);
       },
-      handleCompositionEnd() {},
+      handleCompositionEnd(event) {
+        if (this.isComposing) {
+          this.isComposing = false;
+          this.handleInput(event);
+        }
+      },
       getInput() {
         return this.$refs.input || this.$refs.textarea;
       },
@@ -226,13 +200,13 @@
       setNativeInputValue() {
         const input = this.getInput();
         if (!input) return;
-        console.log('this.nativeInputValue',this.nativeInputValue,'value',input.value)
         if (input.value === this.nativeInputValue) return;
         input.value = this.nativeInputValue;
       },
     },
 
     created() {
+      this.isComposing = false;
     },
 
     mounted() {
