@@ -16,8 +16,8 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('examples'),
-        '@utils':resolve('utils'),
-        'fe-ui':resolve('./')
+        '@utils': resolve('utils'),
+        'fe-ui': resolve('./')
       }
     }
   },
